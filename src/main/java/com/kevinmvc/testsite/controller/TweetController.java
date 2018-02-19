@@ -7,17 +7,38 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+
 public class TweetController {
     @Autowired
     private Twitter twitter;//先注入twitter对象
 
-    @RequestMapping("/twitter")
-    public String hello(@RequestParam(defaultValue = "haohaojin's tweet") String search,Model model){
+    @RequestMapping("/")
+    public String home(){
+        return "searchPage";
+    }
+
+    @RequestMapping(value = "/postSearch",method = RequestMethod.POST)
+    public String postSearch(HttpServletRequest request, RedirectAttributes redirectAttributes){
+        String search=request.getParameter("search");//Servlet的request对象，获取POST的元素
+        if(search.toLowerCase().contains("struct"))
+        {
+            redirectAttributes.addFlashAttribute("error","Try using spring instead");//向redirect库中添加元素
+            return "redirect:/";
+        }
+        redirectAttributes.addAttribute("search",search);
+        return "redirect:result";
+    }
+
+    @RequestMapping("/result")
+    public String hello(@RequestParam(defaultValue = "masterSpringMVC4") String search,Model model){
         SearchResults searchResults=twitter.searchOperations().search(search);//使用twitter对象进行搜索操作
         List<Tweet> tweets=searchResults.getTweets();
         model.addAttribute("search",search);
