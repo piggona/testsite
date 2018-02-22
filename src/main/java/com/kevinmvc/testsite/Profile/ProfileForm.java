@@ -1,5 +1,6 @@
 package com.kevinmvc.testsite.Profile;
 
+import com.kevinmvc.testsite.date.PastLocalDate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,6 +19,7 @@ public class ProfileForm {
     @NotEmpty
     private String email;
     @NotNull
+    @PastLocalDate
     private LocalDate birthDate;
     @NotEmpty
     private List<String> taste =new ArrayList<>();

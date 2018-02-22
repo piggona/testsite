@@ -13,13 +13,14 @@
     <h2 class="indigo-text center">Personal Info</h2>
 
     <form th:action="@{/profile}" th:object="${profileForm}" method="post" class="col m8 s12 offset-m2">
-        <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+        <!--ul th:if="${#fields.hasErrors('*')}" class="errorlist">
             <li th:each="err :${#fields.errors('*')}" th:text="${err}"></li>
-        </ul>
+        </ul-->
         <div class="row">
             <div class="input-field col s6">
-                <input id="twitterHandle" th:field="${profileForm.twitterHandle}" type="text" th:errorclass="invalid"/>
+                <input th:field="${profileForm.twitterHandle}" id="twitterHandle" type="text" th:errorclass="invalid"/>
                 <label for="twitterHandle">Last Name</label>
+
                 <div th:errors="*{twitterHandle}" class="red-text">Error</div>
             </div>
             <div class="input-field col s6">
