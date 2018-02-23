@@ -13,26 +13,27 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.time.LocalDate;
 
 @Configuration
-public class WebConfiguration extends WebMvcConfigurerAdapter{
-    @Bean
-    public LocaleResolver localeResolver(){//设置LocaleResolver的接口实现
-        return new SessionLocaleResolver();
-    }
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor(){//设置Locale信息的接收器
-        LocaleChangeInterceptor localeChangeInterceptor=new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");
-        return localeChangeInterceptor;
-    }
-    @Override
-    public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(localeChangeInterceptor());
-    }
-
+public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldType(LocalDate.class, new USLocalDateFormatter());
     }
 
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new SessionLocaleResolver();
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+        return localeChangeInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
+    }
 }

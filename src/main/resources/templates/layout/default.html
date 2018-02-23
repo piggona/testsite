@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xsi:schemaLocation="www.thymeleaf.org ">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta http-equiv="ContentType" content="text/html";
           charset="GB2312"/>
@@ -13,7 +12,7 @@
 <body>
 <ul id="lang-dropdown" class="dropdown-content">
     <li><a href="?lang=en">English</a></li>
-    <li><a href="?lang=ch">жпнд</a></li>
+    <li><a href="?lang=ch">Chinese</a></li>
 </ul>
 <nav>
     <div class="nav-wrapper indigo">
@@ -30,6 +29,8 @@
 <script src="/webjars/materializecss/0.100.2/js/materialize.js"></script>
 <script type="text/javascript">
     $(".dropdown-button").dropdown();
+</script>
+<script type="text/javascript" layout:fragment="script">
 </script>
 </body>
 </html>
